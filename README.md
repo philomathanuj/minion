@@ -5,14 +5,14 @@ Welcome to the world of containers. Minion is the project to explore and experim
 2. Verify Keepalive
 http://localhost:8080/keepalive
 3. Verify index page
-4. http://localhost:8080/index.html
-5. Find detailed steps -
-   http://localhost:8080/minikube.txt
-   http://localhost:8080/docker.txt
-   http://localhost:8080/helm.txt
-   http://localhost:8080/prometheus.txt
-   http://localhost:8080/grafana.txt
-6. Start experimenting and enriching your understanding with lab like exploration about -  
+   http://localhost:8080/index.html
+4. Find detailed steps - <br>
+   http://localhost:8080/minikube.txt <br>
+   http://localhost:8080/docker.txt <br>
+   http://localhost:8080/helm.txt <br>
+   http://localhost:8080/prometheus.txt <br>
+   http://localhost:8080/grafana.txt <br>
+5. Start experimenting and enriching your understanding with lab like exploration about - <br>  
 * **Docker**
 * **DockerHub: Image Registry**
 * **K8 with Minikube**
