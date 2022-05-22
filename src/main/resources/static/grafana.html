@@ -1,0 +1,51 @@
+Install grafana
+----------
+
+helm repo add grafana https://grafana.github.io/helm-charts
+
+ helm search repo grafana
+
+
+helm install grafana grafana/grafana
+
+alernatively install
+helm install grafana bitnami/grafana
+
+
+kubectl expose service grafana --type=NodePort --target-port=3000 --name=grafana-np
+
+Grafana is password protected by default, in order to retrieve the admin user password we can run the following command:
+philomathanuj@philomathanuj-Inspiron-5570:~/IdeaProjects/minion$ kubectl get secret --namespace default grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+HGDXkqAu4cLu2SA0GhrUIyoml2uaSdnnM1EIMX8A
+
+Get the grafana url 
+-------
+philomathanuj@philomathanuj-Inspiron-5570:~/IdeaProjects/minion$ minikube service --url grafana-np
+http://192.168.58.2:31818
+
+Configure Prometheus Datasource
+-----------------
+Go to settings and add Prometheus data source
+Name: Prometheus
+URL: http://prometheus-server:80
+Access: Server(defaut)
+everything else remains the same
+Save and Test
+
+Setup one of the many already available community provided Kubernetes Dashboards
+------------
+For this I will be using this one https://grafana.com/grafana/dashboards/6417, but you can use any other Dashboard. 
+You can even create your own very easily, but this will be covered in another post.
+We head to Create (+) > Import section to Import via grafana.com and we set 6417 into the id field and click Load.
+
+uuid: 4XuMd2Iiz
+
+select prometheus as data source
+
+Alternatively use 2119 dashboard which looks even better
+
+Referecnes:
+-----------------
+https://blog.marcnuri.com/prometheus-grafana-setup-minikube
+https://opensource.com/article/21/6/chaos-grafana-prometheus
+

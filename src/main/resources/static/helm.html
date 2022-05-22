@@ -1,0 +1,52 @@
+install helm and verify
+-------------------
+sudo snap install helm --classic
+which helm
+
+Go project root dir and create helm chart
+----------------
+helm create helm-charts
+
+To see consolidated yml
+--------
+helm template minion-helm
+
+install helm chart to deploy k8 resources:
+----------
+minion-with-helm-v1 -> helm release name
+minion-helm -> folder that contains Chart.yml has files created by helm craete
+helm install minion-with-helm-v1 minion-helm
+
+
+
+verify by
+kubectl get all
+
+upgrade application
+-----------
+helm upgrade minion-with-helm-v1 .
+
+to list releases
+-----
+helm list -a
+
+rollback release to revision number 2
+-------------
+helm rollback minion-with-helm-v1 2
+
+finally to delete helm release
+---------
+helm delete minion-with-helm-v1
+
+To access cluster ip in minikube you ssh into it -
+------------------
+minikube ssh
+curl http://10.101.186.88:8080/index.html
+
+References:
+----------------
+https://jhooq.com/building-first-helm-chart-with-spring-boot/
+https://stackoverflow.com/questions/46083542/exposed-service-clusterips-arent-accessible-within-minikube
+
+
+

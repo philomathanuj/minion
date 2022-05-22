@@ -1,0 +1,56 @@
+
+Install Prometheus
+------
+
+add repo:
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+
+install prometheus:
+helm install prometheus prometheus-community/prometheus
+
+expose prometheus:
+kubectl expose service prometheus-server --type=NodePort --target-port=9090 --name=prometheus-server-np
+
+check status:
+
+philomathanuj@philomathanuj-Inspiron-5570:~/IdeaProjects/minion$ kubectl get all
+NAME                                                READY   STATUS    RESTARTS   AGE
+pod/prometheus-alertmanager-94b6f74cf-z4wjx         2/2     Running   0          81s
+pod/prometheus-kube-state-metrics-748fc7f64-p728k   1/1     Running   0          81s
+pod/prometheus-node-exporter-8m7r6                  1/1     Running   0          81s
+pod/prometheus-pushgateway-5f5cdd4569-rlsm9         1/1     Running   0          81s
+pod/prometheus-server-7f4bb6844b-s9fsl              1/2     Running   0          81s
+
+NAME                                    TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+service/kubernetes                      ClusterIP   10.96.0.1        <none>        443/TCP        6h4m
+service/prometheus-alertmanager         ClusterIP   10.106.197.89    <none>        80/TCP         82s
+service/prometheus-kube-state-metrics   ClusterIP   10.107.42.226    <none>        8080/TCP       82s
+service/prometheus-node-exporter        ClusterIP   10.101.117.226   <none>        9100/TCP       82s
+service/prometheus-pushgateway          ClusterIP   10.106.161.22    <none>        9091/TCP       81s
+service/prometheus-server               ClusterIP   10.108.165.252   <none>        80/TCP         82s
+service/prometheus-server-np            NodePort    10.105.134.18    <none>        80:31539/TCP   56s
+
+NAME                                      DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+daemonset.apps/prometheus-node-exporter   1         1         1       1            1           <none>          81s
+
+NAME                                            READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/prometheus-alertmanager         1/1     1            1           81s
+deployment.apps/prometheus-kube-state-metrics   1/1     1            1           81s
+deployment.apps/prometheus-pushgateway          1/1     1            1           81s
+deployment.apps/prometheus-server               0/1     1            0           81s
+
+NAME                                                      DESIRED   CURRENT   READY   AGE
+replicaset.apps/prometheus-alertmanager-94b6f74cf         1         1         1       81s
+replicaset.apps/prometheus-kube-state-metrics-748fc7f64   1         1         1       81s
+replicaset.apps/prometheus-pushgateway-5f5cdd4569         1         1         1       81s
+replicaset.apps/prometheus-server-7f4bb6844b              1         1         0       81s
+
+
+------------------------------------------
+Get the url for prometheus service and launch browser:
+------------------------
+philomathanuj@philomathanuj-Inspiron-5570:~/IdeaProjects/minion$ minikube service --url prometheus-server-np 
+http://192.168.58.2:31539
+
+
+

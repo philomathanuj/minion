@@ -1,0 +1,121 @@
+Use DockerHub registry with minikube
+------------------
+kubectl create secret docker-registry regcred --docker-server=https://registry-1.docker.io/v2/ --docker-username=philomathanuj --docker-password=@ubexxxxxxx1 --docker-email=philomath.anuj@gmail.com
+
+Deploy the app
+------------------------------
+kubectl create deployment docker-tutorial --image=philomathanuj/docker101tutorial
+see that tag is not mentioned as by default it's latest, yould say like this - 
+kubectl create deployment docker-tutorial --image=philomathanuj/docker101tutorial:latest
+
+Expose Port:
+-----------
+kubectl expose deployment docker-tutorial --type=NodePort --port=80
+allows to access on - http://localhost:80/tutorial
+
+Port Forwarding:
+-------------
+kubectl port-forward service/docker-tutorial 7082:80
+allows to access on http://localhost:7082/tutorial/
+
+
+Load Balancer:
+-----------------
+
+To access a LoadBalancer deployment, use the “minikube tunnel” command. Here is an example deployment:
+
+kubectl create deployment tutorial-lb --image=philomathanuj/docker101tutorial
+
+kubectl expose deployment tutorial-lb --type=LoadBalancer --port=80
+
+In a separate tab execute - minikube tunnel (this populates external ip)
+
+allows to access on this (see the external ip in the output of kubectl get svc)
+http://10.109.91.144/tutorial/
+
+Scale deployment manually:
+-----------------------
+kubectl scale deployment docker-tutorial --replicas 3
+
+To monitor the progress:
+------
+kubectl get deployments --watch
+
+Update application:
+-----------------------
+Way 1: kubectl set image deployment/docker-tutorial docker101tutorial=philomathanuj/docker101tutorial:latest
+
+Now check the rollout history:
+-----------
+kubectl rollout history deployment docker-tutorial
+you'll see two revisions
+
+Way 2: kubectl edit deployment docker-tutorial
+
+Rollback deployment
+---------------------
+to previous:
+kubectl rollout undo deployment docker-tutorial
+
+to specific revision number:
+kubectl rollout undo deployment docker-tutorial --to-revision 3
+
+check rollout status:
+kubectl rollout status deployment/docker-tutorial
+
+
+Declarative approach
+----------
+You could use edit deployment option and create a deployment.yml in controllers folder
+Create resource
+
+kubectl create -f docker-tutorial-deployment.yaml
+
+Update deployment
+kubectl apply -f docker-tutorial-deployment.yaml
+
+Auto scale deployment:
+------------
+kubectl autoscale deployment/docker-tutorial --min=5 --max=10 --cpu-percent=30
+
+see with deployment watch
+--
+also to see replica sets;
+------
+kubectl get rs
+
+to see nodes:
+--------------
+kubectl get nodes
+
+to describe a deployment 
+-----
+
+kubectl describe deployment docker-tutorial
+
+
+References:
+-------------
+https://minikube.sigs.k8s.io/docs/start/
+https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+https://www.katacoda.com/courses/kubernetes/playground
+http://labs.play-with-k8s.com/
+https://jhooq.com/building-first-helm-chart-with-spring-boot/
+https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/
+https://kubernetes.io/docs/concepts/services-networking/network-policies/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

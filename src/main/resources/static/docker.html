@@ -1,0 +1,70 @@
+
+Build image:
+----------------
+become root, cd to project dir root where Dockerfile is present and build the image with the tag v1
+-------------
+root@philomathanuj-Inspiron-5570:/home/philomathanuj/IdeaProjects/minion# docker build -t philomathanuj/minion:v1 .
+Sending build context to Docker daemon  17.77MB
+Step 1/4 : FROM openjdk:17-oracle
+17-oracle: Pulling from library/openjdk
+38a980f2cc8a: Pull complete 
+de849f1cfbe6: Pull complete 
+a7203ca35e75: Pull complete 
+Digest: sha256:83ffa182a7cfc8313583fe1cc42172a48a021f368a1ff11fe0d957c3b3b8a620
+Status: Downloaded newer image for openjdk:17-oracle
+ ---> 5e28ba2b4cdb
+Step 2/4 : ARG JAR_FILE=target/*.jar
+ ---> Running in 0063d808b84e
+Removing intermediate container 0063d808b84e
+ ---> 4dd5d533fabd
+Step 3/4 : COPY ${JAR_FILE} minion.jar
+ ---> 669ae88e0a62
+Step 4/4 : ENTRYPOINT ["java","-jar","/minion.jar"]
+ ---> Running in 382f3063be74
+Removing intermediate container 382f3063be74
+ ---> 19955bf43de8
+Successfully built 19955bf43de8
+Successfully tagged philomathanuj/minion:v1
+
+Login to Docker
+----
+This is needed so that you can push the image to docker hub
+
+docker login
+
+You shall be prompted for your user name and password
+
+Push the image to docker hub
+--------------------
+
+root@philomathanuj-Inspiron-5570:/home/philomathanuj/IdeaProjects/minion# docker push philomathanuj/minion:v1 
+The push refers to repository [docker.io/philomathanuj/minion]
+80ebb5b626aa: Pushed 
+dc9fa3d8b576: Mounted from library/openjdk 
+27ee19dc88f2: Mounted from library/openjdk 
+c8dd97366670: Mounted from library/openjdk 
+v1: digest: sha256:080f542f99f7dcc2647a8838d9e7aaa2b7d0018e89f44a68fbc7ab2e3523df68 size: 1166
+
+Pull the image from docker hub
+-----------
+docker pull philomathanuj/minion:v1
+
+
+Run the container in detached mode with host and container ports mapped:
+---------------------
+root@philomathanuj-Inspiron-5570:/home/philomathanuj/IdeaProjects/minion# docker run -d -p 8080:8080 philomathanuj/minion:v1
+7678dc22f801f88cdcd4a7f39657e004efa26be72e8322678d0ad96d79226f01
+root@philomathanuj-Inspiron-5570:/home/philomathanuj/IdeaProjects/minion# docker container ls
+CONTAINER ID   IMAGE                                 COMMAND                  CREATED         STATUS         PORTS                                                                                                                                  NAMES
+7678dc22f801   philomathanuj/minion:v1               "java -jar /minion.j…"   5 seconds ago   Up 4 seconds   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp                                                                                              adoring_meitner
+9b7c53b3db2c   gcr.io/k8s-minikube/kicbase:v0.0.30   "/usr/local/bin/entr…"   8 hours ago     Up 8 hours     127.0.0.1:49157->22/tcp, 127.0.0.1:49156->2376/tcp, 127.0.0.1:49155->5000/tcp, 127.0.0.1:49154->8443/tcp, 127.0.0.1:49153->32443/tcp   minikube
+
+Test in the browser:
+-----------
+http://localhost:8080/index.html
+http://localhost:8080/keepalive
+
+
+
+
+
