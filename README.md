@@ -21,7 +21,7 @@ http://localhost:8080/keepalive
 * **Grafana - Dashboard to visualise your K8 containers**
 
 **Prerequisites**
-* These examples have been tried on ubuntu v20, 16 GB RAM, 4 CPUs
+* These examples have been tried on ubuntu v20, 16 GB RAM, 4 CPUs, Java 17
 * Docker and minikube should be installed on the system with minikube using the docker engine
 
 
