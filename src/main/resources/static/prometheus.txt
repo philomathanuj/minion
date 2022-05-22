@@ -1,4 +1,5 @@
-
+<html>
+<p>
 Install Prometheus
 ------
 
@@ -31,7 +32,7 @@ service/prometheus-server               ClusterIP   10.108.165.252   <none>     
 service/prometheus-server-np            NodePort    10.105.134.18    <none>        80:31539/TCP   56s
 
 NAME                                      DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
-daemonset.apps/prometheus-node-exporter   1         1         1       1            1           <none>          81s
+daemonset.apps/prometheus-node-exporter   1         1         1       1            1           <p>          81s
 
 NAME                                            READY   UP-TO-DATE   AVAILABLE   AGE
 deployment.apps/prometheus-alertmanager         1/1     1            1           81s
@@ -52,5 +53,8 @@ Get the url for prometheus service and launch browser:
 philomathanuj@philomathanuj-Inspiron-5570:~/IdeaProjects/minion$ minikube service --url prometheus-server-np 
 http://192.168.58.2:31539
 
+----
+</p>
+</html>
 
 

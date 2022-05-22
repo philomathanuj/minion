@@ -1,3 +1,5 @@
+<html>
+<p>
 install helm and verify
 -------------------
 sudo snap install helm --classic
@@ -48,5 +50,5 @@ References:
 https://jhooq.com/building-first-helm-chart-with-spring-boot/
 https://stackoverflow.com/questions/46083542/exposed-service-clusterips-arent-accessible-within-minikube
 
-
-
+</p>
+</html>

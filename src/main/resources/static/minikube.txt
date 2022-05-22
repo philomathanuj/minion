@@ -1,3 +1,6 @@
+<html>
+<p>
+
 Use DockerHub registry with minikube
 ------------------
 kubectl create secret docker-registry regcred --docker-server=https://registry-1.docker.io/v2/ --docker-username=philomathanuj --docker-password=@ubexxxxxxx1 --docker-email=philomath.anuj@gmail.com
@@ -104,7 +107,8 @@ https://jhooq.com/building-first-helm-chart-with-spring-boot/
 https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/
 https://kubernetes.io/docs/concepts/services-networking/network-policies/
 
-
+</p>
+</html>
 
 
 

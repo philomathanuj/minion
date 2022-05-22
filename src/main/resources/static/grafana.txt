@@ -1,3 +1,5 @@
+<html>
+<p>
 Install grafana
 ----------
 
@@ -48,4 +50,5 @@ Referecnes:
 -----------------
 https://blog.marcnuri.com/prometheus-grafana-setup-minikube
 https://opensource.com/article/21/6/chaos-grafana-prometheus
-
+</p>
+</html>

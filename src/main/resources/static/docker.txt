@@ -1,15 +1,15 @@
-
 Build image:
 ----------------
+
 become root, cd to project dir root where Dockerfile is present and build the image with the tag v1
 -------------
 root@philomathanuj-Inspiron-5570:/home/philomathanuj/IdeaProjects/minion# docker build -t philomathanuj/minion:v1 .
 Sending build context to Docker daemon  17.77MB
 Step 1/4 : FROM openjdk:17-oracle
 17-oracle: Pulling from library/openjdk
-38a980f2cc8a: Pull complete 
-de849f1cfbe6: Pull complete 
-a7203ca35e75: Pull complete 
+38a980f2cc8a: Pull complete
+de849f1cfbe6: Pull complete
+a7203ca35e75: Pull complete
 Digest: sha256:83ffa182a7cfc8313583fe1cc42172a48a021f368a1ff11fe0d957c3b3b8a620
 Status: Downloaded newer image for openjdk:17-oracle
  ---> 5e28ba2b4cdb
@@ -37,12 +37,12 @@ You shall be prompted for your user name and password
 Push the image to docker hub
 --------------------
 
-root@philomathanuj-Inspiron-5570:/home/philomathanuj/IdeaProjects/minion# docker push philomathanuj/minion:v1 
+root@philomathanuj-Inspiron-5570:/home/philomathanuj/IdeaProjects/minion# docker push philomathanuj/minion:v1
 The push refers to repository [docker.io/philomathanuj/minion]
-80ebb5b626aa: Pushed 
-dc9fa3d8b576: Mounted from library/openjdk 
-27ee19dc88f2: Mounted from library/openjdk 
-c8dd97366670: Mounted from library/openjdk 
+80ebb5b626aa: Pushed
+dc9fa3d8b576: Mounted from library/openjdk
+27ee19dc88f2: Mounted from library/openjdk
+c8dd97366670: Mounted from library/openjdk
 v1: digest: sha256:080f542f99f7dcc2647a8838d9e7aaa2b7d0018e89f44a68fbc7ab2e3523df68 size: 1166
 
 Pull the image from docker hub
@@ -63,7 +63,6 @@ Test in the browser:
 -----------
 http://localhost:8080/index.html
 http://localhost:8080/keepalive
-
 
 
 
